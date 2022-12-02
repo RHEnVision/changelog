@@ -45,5 +45,3 @@ def test_jira_issue_parsing() -> int:
     assert check_commit(changelog.commits[0], jira_project) != 0
     changelog = StubbedChangelog("fix: Subject")
     assert check_commit(changelog.commits[0], jira_project) != 0
-
-    return 0
