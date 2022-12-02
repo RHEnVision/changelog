@@ -34,6 +34,8 @@ class GitHubJiraProvider(GitHub):
 
 
 class ProvisioningChangelog(Changelog):
+    """A class to represent a Provisioning common project changelog."""
+
     def __init__(self, repository: str, jira_url: str, jira_project: str, limit=None):
         self.limit = limit
 
