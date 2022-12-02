@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rhenvision-changelog"
+description = "Wrapper around git-changelog to enhance it for Jira issues"
+readme = "README.md"
+authors = [{ name = "Ondrej Ezr", email = "oezr@redhat.com" }]
+license = { file = "LICENSE" }
+dynamic = ["version"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["changelog", "changelog-generator", "commit-style"]
+dependencies = [
+    "git-changelog >= 0.6.0",
+]
+requires-python = ">=3.7"
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.urls]
+Homepage = "https://github.com/RHEnVision/changelog"
+
+[project.scripts]
+envision-changelog = "rhenvision_changelog.__main__:main"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "src"
+]
