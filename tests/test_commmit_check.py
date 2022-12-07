@@ -36,6 +36,8 @@ def test_jira_issue_parsing() -> int:
     assert check_commit(changelog.commits[0], jira_project) == 0
     changelog = StubbedChangelog("feat: Subject\nFixes: HMSJIRA-123")
     assert check_commit(changelog.commits[0], jira_project) == 0
+    changelog = StubbedChangelog("feat: Subject\njira.test.com/browse/HMSJIRA-123")
+    assert check_commit(changelog.commits[0], jira_project) == 0
     # no issue link necessary for other types
     changelog = StubbedChangelog("build: Subject")
     assert check_commit(changelog.commits[0], jira_project) == 0

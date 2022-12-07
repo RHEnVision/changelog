@@ -8,7 +8,7 @@ from git_changelog import templates
 from git_changelog.build import Changelog
 from git_changelog.providers import GitHub, RefDef, RefRe
 
-RefRe.BBB = r"(?:^|[\s,]|\()"  # blank or bracket before
+RefRe.BBB = r"(?:^|[\s,]|\(|/)"  # blank or bracket before
 RefRe.BBA = r"(?:[\s,]|$)|\)"  # blank or bracket after
 RefRe.JIRA_ISSUE = r"(?P<jira_project>HMS[A-Z]+)-(?P<ref>[1-9]\d*)"  # forces the HMS jira project prefix for now
 
