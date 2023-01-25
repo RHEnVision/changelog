@@ -9,7 +9,7 @@ from rhenvision_changelog.changelog import ProvisioningChangelog
 from rhenvision_changelog.commit_check import check_commit
 
 JIRA_URL = "https://issues.redhat.com"
-JIRA_PROJECT = "HMSPROV"
+JIRA_PROJECT = "HMS"
 
 def get_parser() -> argparse.ArgumentParser:
     """
