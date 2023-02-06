@@ -46,7 +46,7 @@ class ProvisioningChangelog(Changelog):
         namespace, project = "/".join(split[3:-1]), split[-1]
 
         provider = GitHubJiraProvider(namespace, project, jira_url, jira_project)
-        super().__init__(repository, provider=provider, style="angular")
+        super().__init__(repository, provider=provider, convention="angular")
 
     def get_log(self) -> str:
         """Get the `git log` output possibly limited by limit passed to constructor.

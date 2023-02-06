@@ -5,13 +5,13 @@ def check_commit(commit, jira_project, length_limit=70) -> int:
         sys.stderr.write("ERROR: Commit message length too long (limit is " + length_limit + "): " + commit.subject + "\n")
         return 1
 
-    if commit.style["type"] == "":
+    if commit.convention["type"] == "":
         sys.stderr.write("ERROR: Commit message must have a type 'type: subject': " + commit.subject + "\n")
         return 2
 
-    if commit.style["type"] in ["Features", "Bug Fixes"]:
-        if commit.style["scope"] is not None and jira_project not in commit.style["scope"]:
-            sys.stderr.write("ERROR: Scope for Feature and Bug fix needs to be Jira issue in format '"+jira_project+"-XXX': " + commit.style["scope"] + "\n")
+    if commit.convention["type"] in ["Features", "Bug Fixes"]:
+        if commit.convention["scope"] is not None and jira_project not in commit.convention["scope"]:
+            sys.stderr.write("ERROR: Scope for Feature and Bug fix needs to be Jira issue in format '"+jira_project+"-XXX': " + commit.convention["scope"] + "\n")
             return 2
 
         if "issues" not in commit.text_refs or len(commit.text_refs["issues"]) == 0:
