@@ -2,7 +2,7 @@ import sys
 
 def check_commit(commit, jira_project, length_limit=70) -> int:
     if len(commit.subject) > length_limit:
-        sys.stderr.write("ERROR: Commit message length too long (limit is " + length_limit + "): " + commit.subject + "\n")
+        sys.stderr.write("ERROR: Commit subject is too long (limit is " + str(length_limit) + "): " + commit.subject + "\n")
         return 1
 
     if commit.convention["type"] == "":
