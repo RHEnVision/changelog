@@ -8,7 +8,7 @@ Changelog generator for RHEnVision projects
 ```bash
 git clone https://github.com/RHEnVision/changelog
 
-python3 -m pip install -e changelog
+pip3 install ./changelog
 ```
 
 ## Usage
