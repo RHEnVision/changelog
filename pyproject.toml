@@ -16,7 +16,7 @@ classifiers = [
 ]
 keywords = ["changelog", "changelog-generator", "commit-style"]
 dependencies = [
-    "git-changelog = 1.0.0",
+    "git-changelog >= 2.0.0",
 ]
 requires-python = ">=3.7"
 
