@@ -7,9 +7,10 @@ from typing import Dict
 from git_changelog import templates
 from git_changelog.build import Changelog
 from git_changelog.providers import GitHub, RefDef, RefRe
+from git_changelog.commit import AngularConvention, Commit
 
 RefRe.BBB = r"(?:^|[\s,]|\(|/)"  # blank or bracket before
-RefRe.BBA = r"(?:[\s,]|$)|\)"  # blank or bracket after
+RefRe.BBA = r"(?:[\s,]|\)|$)"  # blank or bracket after
 RefRe.JIRA_ISSUE = r"(?P<jira_project>HMS[A-Z]*)-(?P<ref>[1-9]\d*)"  # forces the HMS jira project prefix for now
 
 class GitHubJiraProvider(GitHub):
@@ -30,7 +31,21 @@ class GitHubJiraProvider(GitHub):
         match_dict["jira_url"] = self.jira_url
         if not match_dict.get("jira_project"):
             match_dict["jira_project"] = self.jira_project
+
         return super().build_ref_url(ref_type, match_dict)
+
+class AngularJiraConvention(AngularConvention):
+    """A class to enhance scope by an Jira issue URL."""
+
+    def parse_commit(self, commit: Commit):
+        result = super().parse_commit(commit)
+        scope = result["scope"]
+        if isinstance(scope, str) and "issues" in commit.text_refs:
+            for issue in commit.text_refs["issues"]:
+                if issue.ref in scope or scope in issue.ref:
+                    result["scope"] = "[{}]({})".format(scope, issue.url)
+
+        return result
 
 
 class ProvisioningChangelog(Changelog):
@@ -46,9 +61,9 @@ class ProvisioningChangelog(Changelog):
         namespace, project = "/".join(split[3:-1]), split[-1]
 
         provider = GitHubJiraProvider(namespace, project, jira_url, jira_project)
-        super().__init__(repository, provider=provider, convention="angular", parse_provider_refs=True)
+        super().__init__(repository, provider=provider, convention=AngularJiraConvention, parse_provider_refs=True)
 
-    def get_log(self) -> str:
+    def get_log(self):
         """Get the `git log` output possibly limited by limit passed to constructor.
 
         Returns:
