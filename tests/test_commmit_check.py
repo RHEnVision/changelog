@@ -12,6 +12,7 @@ John Doe
 jdoe@test.com
 1669736056
 HEAD -> branch, origin/branch
+701eca9b345a940c8da0bab7fe601666ca9985b9
 """
 
 class StubbedChangelog(ProvisioningChangelog):
