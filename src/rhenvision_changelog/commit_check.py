@@ -1,6 +1,6 @@
 import sys
 
-def check_commit(commit, jira_project, length_limit=70) -> int:
+def check_commit(commit, jira_project, length_limit=135) -> int:
     if len(commit.subject) > length_limit:
         sys.stderr.write("ERROR: Commit subject is too long (limit is " + str(length_limit) + "): " + commit.subject + "\n")
         return 1
