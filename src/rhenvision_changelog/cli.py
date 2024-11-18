@@ -40,6 +40,6 @@ def write_changelog(args: Optional[List[str]] = None) -> int:
 
 
 def run_check_commit(args: Optional[List[str]] = None) -> int:
-    length_limit = 70
+    length_limit = 135
     changelog = ProvisioningChangelog('.', JIRA_URL, JIRA_PROJECT, limit=1)
     return check_commit(changelog.commits[0], JIRA_PROJECT, length_limit=length_limit)
